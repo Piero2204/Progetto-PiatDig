@@ -99,34 +99,48 @@ Il link Glitch rimanda alla pagina principale *index.html*.
 ## Esempio descrittivo di utilizzo del servizio Web + Screenshot
 Questa è la homepage:
 
+![index](https://user-images.githubusercontent.com/88444678/213774888-9609391d-aab3-4122-9dab-872edaac4425.png)
 
 La mappa viene presentata nel seguente modo:
 
+![localizzazione](https://user-images.githubusercontent.com/88444678/213775008-b87c9915-4b25-4f5f-833b-06470393448f.png)
 
 Questa è la pagina di ricerca tramite form:
+
+![tabella](https://user-images.githubusercontent.com/88444678/213775103-46a2d971-8ed0-4ce6-8a8d-5eed0a67f98a.png)
 
 Scegliendo un tipo oppure scrivendo un nome, un codice o un indice, e cliccando sul corrispondente bottone di ricerca, si ottiene il risultato che ci si aspetta.
 
 Nel caso di una ricerca a vuoto:
+
+![vuoto](https://user-images.githubusercontent.com/88444678/213775151-a7ad96d6-069b-49f4-89e3-702808c9feee.png)
 
 Se non si sceglie alcun tipo, o non si scrive alcun nome, codice o indice, viene restituito un messaggio di errore.
 Se la ricerca non produce risultati, viene restituito un messaggio di errore.
 
 Questa è la pagina di inserimento di un nuovo punto di interesse:
 
+![errore](https://user-images.githubusercontent.com/88444678/213775281-1b139575-903c-4ad6-81f8-b67fd0eb3a79.png)
+
 Come si può notare, il nome del punto di interesse non è obbligatorio. Al contrario, lo sono tutti gli altri campi.
 
 Questa è la pagina di rimozione di un punto di interesse:
 
+![rimuovi](https://user-images.githubusercontent.com/88444678/213775352-a83694f0-167c-42b5-b02d-a3e4a7c8b823.png)
+
 Come si può notare, se l'indice esiste il punto viene rimosso.
+
+![nrimuovi](https://user-images.githubusercontent.com/88444678/213775415-448bcfd1-5783-4de4-8ab7-2dc959a075be.png)
 
 Se l'indice non esiste, viene restituito un messaggio di errore.
 
 ### Postman
 Inserendo correttamente tutti i valori, si ottiene il seguente risultato:
 
+![post1](https://user-images.githubusercontent.com/88444678/213775491-3220f019-56fe-4643-9cf3-74cc9e6aa044.png)
 
 Se mancano alcuni valori, si ottiene il seguente risultato:
 
+![post2](https://user-images.githubusercontent.com/88444678/213775536-5bd6e774-25ed-48ba-a928-080838669dda.png)
 
-
+![post3](https://user-images.githubusercontent.com/88444678/213775552-c9899271-a1e6-4ea1-9d44-b7b6e427b23d.png)

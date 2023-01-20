@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A cool thing made with Glitch">
+
+    <title>Strutture</title>
+
+    <!-- <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon"> -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+   integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+   crossorigin=""/>
+
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+   <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+   integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+   crossorigin=""></script>
+    
+    <!-- IonIcons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
+    <!-- Importo le librerie per i font -->
+    <link href="https://fonts.googleapis.com/css2?family=Arima:wght@100&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">  
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Balinese&display=swap" rel="stylesheet">
+    
+    <style>
+      .flex-container{
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .header{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      
+      .header > #back{
+        width: 10%;
+        position: absolute;
+        margin-left: 0;
+      }
+      
+      #back > a{
+        font-size: 40px;
+        color: #bab8b8;
+      }
+      
+      #icon-back:hover{
+        cursor: pointer;
+      }
+      
+      .header > #titolo{
+        width: 100%;
+        font-family: Arima, sans-serif;
+        text-align: center;
+      }
+      
+      #mapid{
+        height: 500px; /*se non si specifica l'altezza, non si può vedere la mappa*/
+        width: 70%;
+        float: left;
+        flex: 1 1 200px;
+        border-radius: 10px;
+      }
+      
+      #pid{
+        width: 30%;
+        float: right;
+        background-color: #ededed;
+        height: 480px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        border-radius: 10px;
+        border: 2px solid #d4d4d4;
+        margin-right: 5px;
+      }
+      
+      #pid > #elstr{
+        font-size: 20px;
+        font-family: 'Montserrat', sans-serif;
+        text-align: center;
+      }
+      
+      #pid > p{
+        margin-left: 10px;
+        font-family: 'Noto Serif Balinese', serif; 
+      }
+      
+      .row{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      
+      /* Responsive */
+      @media screen and (max-width: 600px){
+        .row{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+        }
+        
+        #mapid{
+          height: 2000px; /*se non si specifica l'altezza, non si può vedere la mappa*/
+          width: 100%;
+          float: left;
+          flex: 1 1 200px;
+          border-radius: 10px;
+        }
+        
+        #pid{
+          width: 100%;
+          float: right;
+          background-color: #ededed;
+          height: 350px;
+          overflow-x: hidden;
+          overflow-y: auto;
+          border-radius: 10px;
+          border: 2px solid #d4d4d4;
+          margin-right: 5px;
+        }
+      }
+    </style>
+    
+  </head>
+  
+  
+  
+  <body>
+    
+    <div class="flex-container">
+      <div class="header">
+        <div id="back">
+          <a href="../"><ion-icon name="chevron-back-outline"></ion-icon></a>
+        </div>
+        <div id="titolo">
+          <h1>Servizio Localizzazione Negozi</h1>
+        </div>
+      </div>
+    
+    
+      <main>
+        <div class="row">
+          <!-- Mappa -->
+          <div id="mapid"></div>
+
+          <!-- Elenco dei negozi -->
+          <div id="pid">
+            <p id="elstr">Elenco Negozi: </p>
+          </div>
+        </div>
+
+        <script>
+          const attribution ='&copy; <a href="htts://www.openstreetmap.org/copyright"> OpenStreetMap </a>contributors';
+          const tUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+          const tiles = L.tileLayer(tUrl, {attribution})
+
+          var map = L.map('mapid');
+          tiles.addTo(map);
+
+          //definizione delle costanti di latitudine e longitudine di partenza
+          const latStart = 43.909811;
+          const lonStart = 12.913123;
+
+          //setto il punto di partenza della mappa e il livello di zoom 
+          map.setView([latStart, lonStart], 12);   
+
+          window.addEventListener('load', setupNegozi);
+
+
+          //=====================================================================================
+          //funzione di setup
+
+          async function setupNegozi() {
+            const negozi = await getNegozi();
+
+            for (let i = 2; i < negozi.markersInfo.length; i+=2) {
+              //console.log("lat: " + negozi.markersInfo[i][0] + " lon: " +negozi.markersInfo[i][1] + " Descrizione: " + negozi.markersInfo[i+1]);
+              //console.log("i=" + i + " " + negozi.markersInfo[i]);
+              var lon = negozi.markersInfo[i][0];
+              var lat = negozi.markersInfo[i][1];
+              var descrizione = negozi.markersInfo[i+1];
+
+              //se nel CSV ho latitduine e longitudine, allora posso creare il marker
+              if(!isNaN(lat) && !isNaN(lon)){
+                 var markerStruttura = new L.LatLng(lat, lon); //recupero lat e long per assegnarle al marker quando lo creo nella prossima riga
+                 var marker = new L.Marker(markerStruttura); //creo il marker
+                 map.addLayer(marker);
+                 marker.bindPopup(descrizione); 
+              }
+
+              //aggiungo in lista la descrizione del punto di interesse
+              const par = document.getElementById("pid");
+              par.innerHTML += descrizione;
+            }
+          }
+          
+          
+          //=====================================================================================
+          //creo la lista di strutture
+          async function getNegozi() {
+            const response = await fetch('/negozicsv');
+            const data = await response.text();
+
+            const markersInfo = []; //[[lon,lat], descrizione]
+        
+            const rows = data.split('\n'); // Categoria,Classificazione,Denominazione,Località,Web,Latitudine,Longitudine
+            rows.forEach(row => {
+              const cols = row.split(',');
+
+              //alcuni punti di interesse non hanno un nome
+              if(cols[3] == ""){
+                cols[3] = "Senza nome";
+              }
+
+              const descrizione = "<p><b>Categoria:</b> " + cols[2] + "<br>" +
+                                  "<b>Nome:</b> " + cols[3] + "<br>" +
+                                  "<b>Codice struttura:</b> " + cols[4] + "<br>" +
+                                  "<b>Indirizzo:</b> " + cols[5] + "<br><br></p>";
+
+              markersInfo.push([parseFloat(cols[0]), parseFloat(cols[1])]); //lon, lat
+              markersInfo.push(descrizione);
+            });
+            
+            document.getElementById("elstr").innerHTML += (rows.length - 1); //stampo il numero di punti di interesse sulla mappa
+            return { markersInfo}; 
+          }
+
+        </script>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A cool thing made with Glitch">
+
+    <title>Strutture</title>
+
+    <!-- <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon"> -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+   integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+   crossorigin=""/>
+
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+   <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+   integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+   crossorigin=""></script>
+    
+    <!-- IonIcons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
+    <!-- JQuery --->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
+    
+    <!-- Importo le librerie per i font -->
+    <link href="https://fonts.googleapis.com/css2?family=Arima:wght@100&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">  
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Balinese&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Telugu:wght@300&display=swap" rel="stylesheet">
+    
+    <style>
+      .flex-container{
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .header{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      
+      .header > #back{
+        width: 10%;
+        position: absolute;
+        margin-left: 0;
+      }
+      
+      #back > a{
+        font-size: 40px;
+        color: #bab8b8;
+      }
+      
+      #icon-back:hover{
+        cursor: pointer;
+      }
+      
+      .header > #titolo{
+        width: 100%;
+        font-family: Arima, sans-serif;
+        text-align: center;
+      }
+      
+      
+      
+      /*-- CSS Form --*/
+      .search{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        margin-top: 80px;
+      }
+      
+      .container{
+        float: left;
+        width: 40%;
+        background-color: #dcddde;
+        border-radius: 10px;
+        border: 3px solid #c7c6c5;
+      }
+      
+      .col-25{
+        float: left;
+        width: 25%;
+        margin-top: 6px;
+        text-align: right;
+      }
+      
+      .col-60{
+        float: left;
+        width: 60%;
+        margin-top: 6px;
+        text-align: center;
+      }
+      
+      .col-15{
+        float: left;
+        width: 15%;
+        margin-top: 6px;
+      }
+      
+      .row{
+        display: flex;
+        align-items: center;
+      }
+      
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+      
+      
+      input[type=text], input[type=number], select{
+        width: 80%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+        font-family: 'Exo', sans-serif;
+      }
+      
+      
+      label {
+        padding: 12px 12px 12px 0;
+        display: inline-block;
+        font-family: 'Signika', sans-serif;
+        font-size: 17px;
+      }
+      
+      button{
+        display: inline-block;
+        font-size: 18px;
+      }
+      
+      button:hover{
+        cursor: pointer;
+      }
+      
+      form{
+        margin: 20px 0 20px 0;
+      }
+      
+      /* CSS Result */
+      .result{
+        float: right;
+        width: 50%;
+        background-color: #f7d0be;
+        height: 367px;
+        border-radius: 10px;
+        border: 3px dashed #f5b293;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+      
+      #totris{
+        text-align: center;
+        font-size: 23px;
+        font-family: 'Montserrat', sans-serif;
+      }
+      
+      /* CSS Table */
+      th, td {
+        border: 1px solid #000;
+        border-collapse: collapse;
+        vertical-align: middle;
+      }
+      
+      table{
+        border-collapse: collapse;
+        width: 80%;
+        text-align: center;
+        margin: auto;
+        font-family: 'Anek Telugu', sans-serif;
+        border: 2px solid #000;
+      }
+      
+      /* Responsive */
+      @media screen and (max-width: 600px){
+        .search{
+          display: flex;
+          align-items: center;
+          justify-content: space-evenly;
+          margin-top: 30px;
+          flex-direction: column;
+        }
+        
+        .container{
+          float: left;
+          width: 100%;
+          background-color: #dcddde;
+          border-radius: 10px;
+          border: 3px solid #c7c6c5;
+        }
+        
+        .result{
+          float: right;
+          margin-top: 5px;
+          width: 100%;
+          background-color: #f7d0be;
+          height: 230px;
+          border-radius: 10px;
+          border: 3px dashed #f5b293;
+          overflow-x: hidden;
+          overflow-y: auto;
+        }
+      }
+      
+    </style>
+    
+  </head>
+  
+  
+  
+  <body>
+    
+    <div class="flex-container">
+      <div class="header">
+        <div id="back">
+          <a href="../"><ion-icon name="chevron-back-outline"></ion-icon></a>
+        </div>
+        <div id="titolo">
+          <h1>Servizio Localizzazione Negozi</h1>
+        </div>
+      </div>
+    
+    
+      <main>
+          <div class="search">
+            <div class="container">
+              <form>
+                <div class="row">
+                  <div class="col-25">
+                    <label for="tipo">Tipo</label>
+                  </div>
+                  <div class="col-60">
+                    <select id="tipo" name="tipo" onchange="getSelectedValue();">
+                      <option value="" selected>-- Scegli un'opzione --</option>
+                      <option value="abbigliamento">Abbigliamento</option>
+                      <option value="agenzia">Agenzia</option>
+                      <option value="antiquariato">Antiquariato</option>
+                      <option value="Arredamento">Arredamento</option>
+                      <option value="ceramica">Ceramica</option>
+                      <option value="drogheria">Drogheria</option>
+                      <option value="elettronica">Elettronica</option>
+                      <option value="erboristeria">Erboristeria</option>
+                      <option value="fioraio">Fioraio</option>
+                      <option value="pasticceria">Pasticceria</option>
+                      <option value="pizzeria">Pizzeria</option>
+                      <option value="ristorante">Ristorante</option>
+                      <option value="salumeria">Salumeria</option>
+                      <option value="supermercato">Supermercato</option>
+                    </select>
+                  </div>
+                  <div class="col-15">
+                    <button type="button" onclick="search(1)"><ion-icon name="search-outline"></ion-icon></button>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-25">
+                    <label>Nome</label>
+                  </div>
+                  <div class="col-60">
+                    <input type="text" id="nome" name="nome" placeholder="Nome">
+                  </div>
+                  <div class="col-15">
+                    <button type="button" onclick="search(2); refresh();"><ion-icon name="search-outline"></ion-icon></button>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-25">
+                    <label for="codice">Codice univoco</label>
+                  </div>
+                  <div class="col-60">
+                    <input type="text" id="codice" name="codice" placeholder="Codice univoco" maxlength="3" oninput="this.value = this.value.toUpperCase()">
+                  </div>
+                  <div class="col-15">
+                    <button type="button" onclick="search(3); refresh();"><ion-icon name="search-outline"></ion-icon></button>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-25">
+                    <label>Indice</label>
+                  </div>
+                  <div class="col-60">
+                    <input type="number" id="indice" name="indice" min="1" placeholder="Indice">
+                  </div>
+                  <div class="col-15">
+                    <button type="button" onclick="search(4); refresh();"><ion-icon name="search-outline"></ion-icon></button>
+                  </div>
+                </div>
+                <br>
+
+                
+                
+              </form>
+            </div>
+
+            <!-- Risultato ricerca -->
+            <div class="result">
+              <p id="totris">Risultato</p>
+              <div id="tabella"></div>
+            </div>
+
+          </div>
+          
+          
+
+        <script>
+          async function search(par){
+            let print = "<table>"         +
+                          "<tr>"          +
+                            "<th>Tipo</th>"  +
+                            "<th>Nome</th>"  +
+                            "<th>Codice</th>"  +
+                            "<th>Indirizzo</th>" +
+                          "</tr>";
+            
+            if(par == 1){
+              let value = document.getElementById("tipo").value;
+              
+              if(value == ""){
+                print = "<p style='font-size: 19px; text-align: center; font-family: Nunito, sans-serif;'>Scegliere un tipo</p>";
+              }else{
+                const res = await fetch("/dati/" + value);        
+
+                txt = await res.text();
+
+                if(res.ok){
+                  riga = txt.split(",");
+                  JSON.parse(txt).forEach(el => {
+                    riga = el.toString().split(",");
+                    print += "<tr>" +
+                                "<td>" + riga[2] + "</td>" +
+                                "<td>" + ((riga[3] == "")? "Senza nome" : riga[3]) + "</td>" +
+                                "<td>" + riga[4] + "</td>" +
+                                "<td>" + riga[5] + "</td>" +
+                              "</tr>";
+                  });
+                }else{
+                  print = txt;  //stampo il messaggio di un eventuale ricerca senza risultati
+                }
+              }
+            }
+            
+                  
+            /*--- Ricerca per nome--- */
+            if(par == 2){
+              let nome = document.getElementById("nome").value; //prendo il valore presente nel campo di input
+              
+              if(nome == ""){
+                print = "<p style='font-size: 19px; text-align: center; font-family: Nunito, sans-serif;'>Inserire un nome</p>";
+              }else{
+                const res = await fetch("/dati/" + nome);     //costruisco l'endpoint per far riferimento all'API opportuna
+                                                              //in modo tale che cercando, ad es. <indirizzo>/dati/M.Ferrari
+                                                              //mi venga restituito il plain text corrispondente
+                txt = await res.text();
+
+                if(res.ok){
+                  JSON.parse(txt).forEach(el => {
+                    riga = el.toString().split(",");
+
+                    print += "<tr>" +
+                                "<td>" + riga[2] + "</td>" +
+                                "<td>" + riga[3] + "</td>" +  //se si cerca per nome, si assume che si conosca
+                                "<td>" + riga[4] + "</td>" +
+                                "<td>" + riga[5] + "</td>" +
+                              "</tr>";
+                  });
+                }else{
+                  print = txt;  //stampo il messaggio di un eventuale ricerca senza risultati
+                }
+              }
+            }
+            
+            /*--- Ricerca per codice ---*/
+            if(par == 3){
+              let codice = document.getElementById("codice").value;
+              
+              if(codice == ""){
+                print = "<p style='font-size: 19px; text-align: center; font-family: Nunito, sans-serif;'>Inserire un codice</p>";
+              }else{
+                const res = await fetch("/dati/" + codice);        
+
+                txt = await res.text();
+
+                if(res.ok){
+                  JSON.parse(txt).forEach(el => {
+                    riga = el.toString().split(",");
+                    print += "<tr>" +
+                                "<td>" + riga[2] + "</td>" +
+                                "<td>" + ((riga[3] == "")? "Senza nome" : riga[3]) + "</td>" +
+                                "<td>" + riga[4] + "</td>" +
+                                "<td>" + riga[5] + "</td>" +
+                              "</tr>";
+                  });
+                }else{
+                  print = txt;  //stampo il messaggio di un eventuale ricerca senza risultati
+                }
+              }
+            }
+            
+            /*--- Ricerca per indice ---*/
+            if(par == 4){
+              let indice = document.getElementById("indice").value;
+              
+              if(indice == ""){
+                print = "<p style='font-size: 19px; text-align: center; font-family: Nunito, sans-serif;'>Inserire un indice</p>";
+              }else{
+                const res = await fetch("/dati/" + indice);        
+
+                txt = await res.text();
+
+                if(res.ok){
+                  riga = txt.split(",");
+                  print += "<tr>" +
+                                "<td>" + riga[2] + "</td>" +
+                                "<td>" + ((riga[3] == "")? "Senza nome" : riga[3]) + "</td>" +
+                                "<td>" + riga[4] + "</td>" +
+                                "<td>" + riga[5] + "</td>" +
+                              "</tr>";
+                }else{
+                  print = txt;  //stampo il messaggio di un eventuale ricerca senza risultati
+                }
+              }
+            }
+            
+            print += "</table>";
+            document.getElementById("tabella").innerHTML = print;
+          }
+          
+          
+          /*Funzione JQuery per cancellare il contenuto dei negozi di input*/
+          function refresh(){
+            $("input").val('');
+          }
+
+        </script>
+      </main>
+    </div>
+  </body>
+</html>

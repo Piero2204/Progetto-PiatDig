@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A cool thing made with Glitch" />
+
+    <title>HomePage</title>
+
+    <!-- Import Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arima:wght@100&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Laila:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Play&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <style>
+    .flex-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #titolo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+
+    #titolo > h1 {
+      font-family: "Arima", cursive;
+    }
+
+    #subtitolo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    #subtitolo > p {
+      font-family: "Montserrat", sans-serif;
+      text-align: center;
+      font-size: 20px;
+    }
+
+    .selezione {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 25px;
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    table {
+      margin: 0 auto;
+      border-collapse: collapse;
+      border-style: hidden;
+    }
+
+    table td {
+      padding: 1rem;
+      border: 4px solid #bdbdbd;
+      font-family: "Laila", sans-serif;
+    }
+
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+
+    @keyframes pulse {
+      25% {
+        transform: scale(1.1);
+      }
+      75% {
+        transform: scale(0.9);
+      }
+    }
+    .pulse {
+      display: inline-block;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      transform: translateZ(0);
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    }
+    .pulse:hover {
+      animation-name: pulse;
+      animation-duration: 2s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 15px;
+      font-family: Play, sans-serif;
+      padding: 3px;
+      background-color: #e3e3e3;
+      color: #4a4a4a;
+      margin-top: 100px;
+    }
+  </style>
+
+  <body>
+    <div class="flex-container">
+      <div id="titolo">
+        <h1>Servizio Localizzazione Negozi</h1>
+      </div>
+
+      <div id="subtitolo">
+        <p>Scegli un'azione</p>
+      </div>
+
+      <div class="selezione">
+        <table>
+          <tr>
+            <td>
+              <a rel="pulse" class="button pulse" href="overview">Visualizza</a>
+            </td>
+            <td>
+              <a rel="pulse" class="button pulse" href="ricerca">Ricerca</a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a rel="pulse" class="button pulse" href="inserisci"
+                >Inserimento</a
+              >
+            </td>
+            <td>
+              <a rel="pulse" class="button pulse" href="rimuovi">Rimozione</a>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <footer>
+        <p>Sito creato da Pierotti Michele</p>
+        <p>Università degli Studi di Urbino Carlo Bo, a.a. 2022/2023</p>
+      </footer>
+    </div>
+  </body>
+</html>

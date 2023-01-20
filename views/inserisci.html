@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A cool thing made with Glitch">
+
+    <title>HomePage</title>
+    
+    <!-- IonIcons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
+    <!-- Import Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Arima:wght@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Laila:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">   
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Balinese&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Telugu:wght@300&display=swap" rel="stylesheet">
+
+  </head>
+  
+  <style>
+    .flex-container{
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .header{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      
+      .header > #back{
+        width: 10%;
+        position: absolute;
+        margin-left: 0;
+      }
+      
+      #back > a{
+        font-size: 40px;
+        color: #bab8b8;
+      }
+      
+      #icon-back:hover{
+        cursor: pointer;
+      }
+      
+      .header > #titolo{
+        width: 100%;
+        font-family: Arima, sans-serif;
+        text-align: center;
+      }
+    
+    
+      /*-- CSS Form --*/      
+      .container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #dcddde;
+        border-radius: 10px;
+        border: 3px solid #c7c6c5;
+        width: 50%;
+        margin: auto;
+      }
+      
+      .col-40{
+        float: left;
+        width: 30%;
+        margin-top: 6px;
+        text-align: center;
+      }
+      
+      .col-60{
+        float: left;
+        width: 70%;
+        margin-top: 6px;
+        text-align: center;
+      }
+      
+      .row{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+      
+      input[type=text], input[type=number], select{
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+        font-family: 'Exo', sans-serif;
+      }
+      
+      label {
+        padding: 12px 12px 12px 0;
+        display: inline-block;
+        font-family: 'Signika', sans-serif;
+        font-size: 17px;
+      }
+      
+      button{
+        font-size: 15px;
+        padding: 8px;
+      }
+      
+      button:hover{
+        cursor: pointer;
+      }
+      
+      form{
+        margin: 20px 0 20px 0;
+      }
+    
+      .btn{
+        margin-top: 20px;
+      }
+    
+      /* Responsive */
+    @media screen and (max-width: 600px){
+      .container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #dcddde;
+        border-radius: 10px;
+        border: 3px solid #c7c6c5;
+        width: 100%;
+        margin: auto;
+      }
+    }
+    
+    
+  </style>
+  
+  <body>
+    <div class="flex-container">
+      <div class="header">
+        <div id="back">
+          <a href="../"><ion-icon name="chevron-back-outline"></ion-icon></a>
+        </div>
+        <div id="titolo">
+          <h1>Servizio Localizzazione Negozi</h1>
+        </div>
+      </div>
+      
+      <div class="container">
+        <form action="/inserimento">
+          <div class="row">
+            <div class="col-40">
+              <label>Tipo</label>
+            </div>
+            <div class="col-60">
+              <select id="tipo" name="tipo" required>
+                <option value="" selected>-- Scegli un'opzione --</option>
+                <option value="abbigliamento">Abbigliamento</option>
+                <option value="agenzia">Agenzia</option>
+                <option value="antiquariato">Antiquariato</option>
+                <option value="Arredamento">Arredamento</option>
+                <option value="ceramica">Ceramica</option>
+                <option value="drogheria">Drogheria</option>
+                <option value="elettronica">Elettronica</option>
+                <option value="erboristeria">Erboristeria</option>
+                <option value="fioraio">Fioraio</option>
+                <option value="pasticceria">Pasticceria</option>
+                <option value="pizzeria">Pizzeria</option>
+                <option value="ristorante">Ristorante</option>
+                <option value="salumeria">Salumeria</option>
+                <option value="supermercato">Supermercato</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-40">
+              <label>Nome</label>
+            </div>
+            <div class="col-60">
+              <input type="text" id="nome" name="nome" placeholder="Nome">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-40">
+              <label for="codice">Codice univoco</label>
+            </div>
+            <div class="col-60">
+              <input type="text" id="codice" name="codice" placeholder="Codice univoco" maxlength="3" oninput="this.value = this.value.toUpperCase()" required>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-40">
+              <label for="codice">Indirizzo</label>
+            </div>
+            <div class="col-60">
+              <input type="text" id="indirizzo" name="indirizzo" placeholder="Indirizzo" required>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-40">
+              <label>Longitudine</label>
+            </div>
+            <div class="col-60">
+              <input type="number" id="long" name="long" step="0.0001" placeholder="Longitudine" required>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-40">
+              <label>Latitudine</label>
+            </div>
+            <div class="col-60">
+              <input type="number" id="lat" name="lat" step="0.0001" placeholder="Latitudine" required>
+            </div>
+          </div>
+          
+          <!-- Bottone -->
+          <div class="row">
+            <div class="btn">
+              <button type="submit">Inserisci</button>
+            </div>
+          </div>
+          
+        </form>
+      </div>
+      
+      
+    </div>
+  </body>
+</html>
